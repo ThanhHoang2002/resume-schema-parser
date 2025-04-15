@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  resume-schema-parser-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: resume-schema-parser-dev
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm start
+    networks:
+      - resume-network-dev
+
+networks:
+  resume-network-dev:
+    driver: bridge 

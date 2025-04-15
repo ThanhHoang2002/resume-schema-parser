@@ -60,17 +60,17 @@ export interface Education {
 }
 
 export interface Award {
-  title: string;
-  date: string;
-  awarder: string;
-  summary: string;
+  title?: string;
+  date?: string;
+  awarder?: string;
+  summary?: string;
 }
 
 export interface Certificate {
-  name: string;
-  date: string;
-  issuer: string;
-  url: string;
+  name?: string;
+  date?: string;
+  issuer?: string;
+  url?: string;
 }
 
 export interface Publication {
@@ -88,8 +88,8 @@ export interface Skill {
 }
 
 export interface Language {
-  language: string;
-  fluency: string;
+  language?: string;
+  fluency?: string;
 }
 
 export interface Interest {
@@ -165,16 +165,16 @@ export interface Resume {
     courses: string[];
   }>;
   awards: Array<{
-    title: string;
-    date: string;
-    awarder: string;
-    summary: string;
+    title?: string;
+    date?: string;
+    awarder?: string;
+    summary?: string;
   }>;
   certificates: Array<{
-    name: string;
-    date: string;
-    issuer: string;
-    url: string;
+    name?: string;
+    date?: string;
+    issuer?: string;
+    url?: string;
   }>;
   publications: Array<{
     name: string;
@@ -189,8 +189,8 @@ export interface Resume {
     keywords: string[];
   }>;
   languages: Array<{
-    language: string;
-    fluency: string;
+    language?: string;
+    fluency?: string;
   }>;
   interests: Array<{
     name: string;
@@ -253,7 +253,7 @@ interface ResumeState {
   removeSkill: (index: number) => void;
   
   // Language methods
-  addLanguage: (language: Language) => void;
+  addLanguage: (language: Partial<Language>) => void;
   updateLanguage: (index: number, language: Partial<Language>) => void;
   removeLanguage: (index: number) => void;
   

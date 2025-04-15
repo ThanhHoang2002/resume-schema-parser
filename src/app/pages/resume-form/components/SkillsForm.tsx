@@ -11,7 +11,7 @@ import { Input } from '@/components/ui/input';
 import { useResumeStore } from '@/stores/resumeStore';
 
 const skillSchema = z.object({
-  name: z.string().min(1, 'Skill name is required'),
+  name: z.string().optional(),
   level: z.string().optional(),
   keywords: z.array(z.string()).optional(),
 });
@@ -170,7 +170,7 @@ const SkillsForm = () => {
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Skill Name*</FormLabel>
+                      <FormLabel>Skill Name</FormLabel>
                       <FormControl>
                         <Input placeholder="Web Development" {...field} />
                       </FormControl>

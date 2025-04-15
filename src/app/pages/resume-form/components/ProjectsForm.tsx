@@ -12,10 +12,10 @@ import { Textarea } from '@/components/ui/textarea';
 import { useResumeStore } from '@/stores/resumeStore';
 
 const projectSchema = z.object({
-  name: z.string().min(1, 'Project name is required'),
-  startDate: z.string().min(1, 'Start date is required'),
+  name: z.string().optional(),
+  startDate: z.string().optional(),
   endDate: z.string().optional(),
-  description: z.string().min(1, 'Description is required'),
+  description: z.string().optional(),
   highlights: z.array(z.string()).optional(),
   url: z.string().url('Please enter a valid URL').optional().or(z.literal('')),
 });

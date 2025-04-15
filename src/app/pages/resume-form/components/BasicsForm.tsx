@@ -19,16 +19,16 @@ const locationSchema = z.object({
 });
 
 const profileSchema = z.object({
-  network: z.string().min(1, 'Network is required'),
-  username: z.string().min(1, 'Username is required'),
+  network: z.string().optional(),
+  username: z.string().optional(),
   url: z.string().url('Please enter a valid URL').optional(),
 });
 
 const basicsSchema = z.object({
-  name: z.string().min(1, 'Name is required'),
+  name: z.string().optional(),
   label: z.string().optional(),
   image: z.string().url('Please enter a valid URL').optional().or(z.literal('')),
-  email: z.string().email('Please enter a valid email address'),
+  email: z.string().email('Please enter a valid email address').optional(),
   phone: z.string().optional(),
   url: z.string().url('Please enter a valid URL').optional().or(z.literal('')),
   summary: z.string().optional(),
@@ -139,7 +139,7 @@ const BasicsForm = () => {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Full Name*</FormLabel>
+                <FormLabel>Full Name</FormLabel>
                 <FormControl>
                   <Input 
                     placeholder="John Doe" 
@@ -184,7 +184,7 @@ const BasicsForm = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email*</FormLabel>
+                <FormLabel>Email</FormLabel>
                 <FormControl>
                   <Input 
                     placeholder="john@example.com" 

@@ -11,8 +11,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { useResumeStore, Reference } from '@/stores/resumeStore';
 
 const referenceSchema = z.object({
-  name: z.string().min(1, 'Reference name is required'),
-  reference: z.string().min(1, 'Reference text is required'),
+  name: z.string().optional(),
+  reference: z.string().optional(),
 });
 
 type ReferenceFormValues = z.infer<typeof referenceSchema>;
@@ -28,9 +28,11 @@ const ReferencesForm = () => {
       reference: '',
     },
   });
-  
   const onSubmit = (data: ReferenceFormValues) => {
-    const referenceData: Reference = data;
+    const referenceData: Reference = {
+      name: data.name || '',
+      reference: data.reference || ''
+    };
     
     if (selectedReferenceIndex !== null) {
       updateReference(selectedReferenceIndex, referenceData);

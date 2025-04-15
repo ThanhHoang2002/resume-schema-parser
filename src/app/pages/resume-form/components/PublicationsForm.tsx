@@ -12,9 +12,9 @@ import { Textarea } from '@/components/ui/textarea';
 import { useResumeStore, Publication } from '@/stores/resumeStore';
 
 const publicationSchema = z.object({
-  name: z.string().min(1, 'Publication title is required'),
-  publisher: z.string().min(1, 'Publisher is required'),
-  releaseDate: z.string().min(1, 'Release date is required'),
+  name: z.string().optional(),
+  publisher: z.string().optional(),
+  releaseDate: z.string().optional(),
   url: z.string().url('Please enter a valid URL').optional().or(z.literal('')),
   summary: z.string().optional(),
 });
@@ -36,9 +36,11 @@ const PublicationsForm = () => {
     },
   });
   
-  const onSubmit = (data: PublicationFormValues) => {
+  const onSubmit = (data: PublicationFormValues) => { 
     const publicationData: Publication = {
-      ...data,
+      name: data.name || '',
+      publisher: data.publisher || '',
+      releaseDate: data.releaseDate || '',
       url: data.url || '',
       summary: data.summary || '',
     };

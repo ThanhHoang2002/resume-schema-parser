@@ -12,10 +12,10 @@ import { Textarea } from '@/components/ui/textarea';
 import { useResumeStore } from '@/stores/resumeStore';
 
 const workSchema = z.object({
-  name: z.string().min(1, 'Company name is required'),
-  position: z.string().min(1, 'Position is required'),
+  name: z.string().optional(),
+  position: z.string().optional(),
   url: z.string().url('Please enter a valid URL').optional().or(z.literal('')),
-  startDate: z.string().min(1, 'Start date is required'),
+  startDate: z.string().optional(),
   endDate: z.string().optional(),
   summary: z.string().optional(),
   highlights: z.array(z.string()).optional(),
@@ -201,7 +201,7 @@ const WorkForm = () => {
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Company Name*</FormLabel>
+                      <FormLabel>Company Name</FormLabel>
                       <FormControl>
                         <Input 
                           placeholder="Acme Inc." 
@@ -224,7 +224,7 @@ const WorkForm = () => {
                   name="position"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Position*</FormLabel>
+                      <FormLabel>Position</FormLabel>
                       <FormControl>
                         <Input 
                           placeholder="Senior Developer" 
@@ -272,7 +272,7 @@ const WorkForm = () => {
                   name="startDate"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Start Date* (YYYY-MM-DD)</FormLabel>
+                      <FormLabel>Start Date (YYYY-MM-DD)</FormLabel>
                       <FormControl>
                         <Input 
                           type="text" 

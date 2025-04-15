@@ -12,9 +12,9 @@ import { Textarea } from '@/components/ui/textarea';
 import { useResumeStore, Award } from '@/stores/resumeStore';
 
 const awardSchema = z.object({
-  title: z.string().min(1, 'Award title is required'),
-  date: z.string().min(1, 'Date is required'),
-  awarder: z.string().min(1, 'Awarder is required'),
+  title: z.string().optional(),
+  date: z.string().optional(),
+  awarder: z.string().optional(),
   summary: z.string().optional(),
 });
 
@@ -36,7 +36,9 @@ const AwardsForm = () => {
   
   const onSubmit = (data: AwardFormValues) => {
     const awardData: Award = {
-      ...data,
+      title: data.title || '',
+      date: data.date || '',
+      awarder: data.awarder || '',
       summary: data.summary || '',
     };
     
@@ -147,7 +149,7 @@ const AwardsForm = () => {
                 name="title"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Award Title*</FormLabel>
+                    <FormLabel>Award Title</FormLabel>
                     <FormControl>
                       <Input placeholder="Employee of the Year" {...field} />
                     </FormControl>
@@ -162,7 +164,7 @@ const AwardsForm = () => {
                   name="date"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Date Received*</FormLabel>
+                      <FormLabel>Date Received</FormLabel>
                       <FormControl>
                         <Input 
                           type="text" 
@@ -186,7 +188,7 @@ const AwardsForm = () => {
                   name="awarder"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Awarded By*</FormLabel>
+                      <FormLabel>Awarded By</FormLabel>
                       <FormControl>
                         <Input placeholder="Company/Organization" {...field} />
                       </FormControl>

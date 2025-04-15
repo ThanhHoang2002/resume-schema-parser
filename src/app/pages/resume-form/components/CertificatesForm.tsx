@@ -11,9 +11,9 @@ import { Input } from '@/components/ui/input';
 import { useResumeStore, Certificate } from '@/stores/resumeStore';
 
 const certificateSchema = z.object({
-  name: z.string().min(1, 'Certificate name is required'),
-  date: z.string().min(1, 'Date is required'),
-  issuer: z.string().min(1, 'Issuer is required'),
+  name: z.string().optional(),
+  date: z.string().optional(),
+  issuer: z.string().optional(),
   url: z.string().url('Please enter a valid URL').optional().or(z.literal('')),
 });
 
@@ -35,7 +35,9 @@ const CertificatesForm = () => {
   
   const onSubmit = (data: CertificateFormValues) => {
     const certificateData: Certificate = {
-      ...data,
+      name: data.name || '',
+      date: data.date || '',
+      issuer: data.issuer || '',
       url: data.url || '',
     };
     
@@ -153,7 +155,7 @@ const CertificatesForm = () => {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Certificate Name*</FormLabel>
+                    <FormLabel>Certificate Name</FormLabel>
                     <FormControl>
                       <Input placeholder="AWS Certified Solutions Architect" {...field} />
                     </FormControl>
@@ -168,7 +170,7 @@ const CertificatesForm = () => {
                   name="date"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Date*</FormLabel>
+                      <FormLabel>Date</FormLabel>
                       <FormControl>
                         <Input 
                           type="text" 
@@ -192,7 +194,7 @@ const CertificatesForm = () => {
                   name="issuer"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Issuing Organization*</FormLabel>
+                      <FormLabel>Issuing Organization</FormLabel>
                       <FormControl>
                         <Input placeholder="Amazon Web Services" {...field} />
                       </FormControl>

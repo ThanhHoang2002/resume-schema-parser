@@ -11,7 +11,7 @@ import { Input } from '@/components/ui/input';
 import { useResumeStore, Interest } from '@/stores/resumeStore';
 
 const interestSchema = z.object({
-  name: z.string().min(1, 'Interest name is required'),
+  name: z.string().optional(),
 });
 
 type InterestFormValues = z.infer<typeof interestSchema>;
@@ -31,7 +31,7 @@ const InterestsForm = () => {
   
   const onSubmit = (data: InterestFormValues) => {
     const interestData: Interest = {
-      ...data,
+      name: data.name || '',
       keywords: keywords,
     };
     

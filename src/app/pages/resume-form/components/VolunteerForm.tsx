@@ -12,10 +12,10 @@ import { Textarea } from '@/components/ui/textarea';
 import { useResumeStore, Volunteer } from '@/stores/resumeStore';
 
 const volunteerSchema = z.object({
-  organization: z.string().min(1, 'Organization name is required'),
-  position: z.string().min(1, 'Position is required'),
+  organization: z.string().optional(),
+  position: z.string().optional(),
   url: z.string().url('Please enter a valid URL').optional().or(z.literal('')),
-  startDate: z.string().min(1, 'Start date is required'),
+  startDate: z.string().optional(),
   endDate: z.string().optional(),
   summary: z.string().optional(),
   highlights: z.array(z.string()).optional(),
@@ -41,13 +41,13 @@ const VolunteerForm = () => {
       highlights: [],
     },
   });
-  
   const onSubmit = (data: VolunteerFormValues) => {
     const volunteerData: Volunteer = {
-      ...data,
-      highlights: highlights,
-      // Make sure all required fields are present
+      organization: data.organization || '',
+      position: data.position || '',
       url: data.url || '',
+      startDate: data.startDate || '',
+      highlights: highlights,
       endDate: data.endDate || '',
       summary: data.summary || '',
     };

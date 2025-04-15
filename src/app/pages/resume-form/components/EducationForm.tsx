@@ -11,11 +11,11 @@ import { Input } from '@/components/ui/input';
 import { useResumeStore } from '@/stores/resumeStore';
 
 const educationSchema = z.object({
-  institution: z.string().min(1, 'Institution is required'),
+  institution: z.string().optional(),
   url: z.string().url('Please enter a valid URL').optional().or(z.literal('')),
-  area: z.string().min(1, 'Area of study is required'),
-  studyType: z.string().min(1, 'Degree/Study type is required'),
-  startDate: z.string().min(1, 'Start date is required'),
+  area: z.string().optional(),
+  studyType: z.string().optional(),
+  startDate: z.string().optional(),
   endDate: z.string().optional(),
   score: z.string().optional(),
   courses: z.array(z.string()).optional(),
@@ -208,7 +208,7 @@ const EducationForm = () => {
                 name="institution"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Institution*</FormLabel>
+                    <FormLabel>Institution</FormLabel>
                     <FormControl>
                       <Input placeholder="Harvard University" {...field} />
                     </FormControl>
@@ -237,7 +237,7 @@ const EducationForm = () => {
                   name="studyType"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Degree/Study Type*</FormLabel>
+                      <FormLabel>Degree/Study Type</FormLabel>
                       <FormControl>
                         <Input placeholder="Bachelor of Science" {...field} />
                       </FormControl>
@@ -251,7 +251,7 @@ const EducationForm = () => {
                   name="area"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Field of Study*</FormLabel>
+                      <FormLabel>Field of Study</FormLabel>
                       <FormControl>
                         <Input placeholder="Computer Science" {...field} />
                       </FormControl>
@@ -267,7 +267,7 @@ const EducationForm = () => {
                   name="startDate"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Start Date*</FormLabel>
+                      <FormLabel>Start Date</FormLabel>
                       <FormControl>
                         <Input 
                           type="text" 

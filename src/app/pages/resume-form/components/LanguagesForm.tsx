@@ -12,8 +12,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useResumeStore, Language } from '@/stores/resumeStore';
 
 const languageSchema = z.object({
-  language: z.string().min(1, 'Language name is required'),
-  fluency: z.string().min(1, 'Fluency level is required'),
+  language: z.string().optional(),
+  fluency: z.string().optional(),
 });
 
 type LanguageFormValues = z.infer<typeof languageSchema>;
@@ -39,7 +39,10 @@ const LanguagesForm = () => {
   });
   
   const onSubmit = (data: LanguageFormValues) => {
-    const languageData: Language = data;
+    const languageData: Language = {
+      language: data.language || '',
+      fluency: data.fluency || '',
+    };
     
     if (selectedLanguageIndex !== null) {
       updateLanguage(selectedLanguageIndex, languageData);
@@ -129,7 +132,7 @@ const LanguagesForm = () => {
                 name="language"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Language*</FormLabel>
+                    <FormLabel>Language</FormLabel>
                     <FormControl>
                       <Input placeholder="English, Spanish, French, etc." {...field} />
                     </FormControl>
@@ -143,7 +146,7 @@ const LanguagesForm = () => {
                 name="fluency"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Fluency Level*</FormLabel>
+                    <FormLabel>Fluency Level</FormLabel>
                     <Select 
                       onValueChange={field.onChange} 
                       defaultValue={field.value}
